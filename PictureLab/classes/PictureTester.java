@@ -17,6 +17,15 @@ public class PictureTester
     beach.explore();
   }
   
+  /** Method to test keepOnlyBlue */
+  public static void testKeepOnlyBlue()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.keepOnlyBlue();
+    beach.explore();
+  }
+  
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -71,6 +80,24 @@ public class PictureTester
     temple.explore();
   }
   
+  /** Method to test mirrorArms */
+  public static void testMirrorArms()
+  {
+    Picture snowman = new Picture("snowman.jpg");
+    snowman.explore();
+    snowman.mirrorArms();
+    snowman.explore();
+  }
+  
+  /** Method to test mirrorGull */
+  public static void testMirrorGull()
+  {
+    Picture seagull = new Picture("seagull.jpg");
+    seagull.explore();
+    seagull.mirrorGull();
+    seagull.explore();
+  }
+  
   /** Method to test the collage method */
   public static void testCollage()
   {
@@ -94,27 +121,42 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
+    
+    //testZeroBlue();
+    
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
+    
     //testNegate();
+    
     //testGrayscale();
+    
     //testFixUnderwater();
+    
     //testMirrorVertical();
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
+    
     //testCollage();
+    
     //testCopy();
+    
     //testEdgeDetection();
     //testEdgeDetection2();
+    
     //testChromakey();
+    
     //testEncodeAndDecode();
+    
     //testGetCountRedOverValue(250);
+    
     //testSetRedToHalfValueInTopHalf();
+    
     //testClearBlueOverValue(200);
+    
     //testGetAverageForColumn(0);
   }
 }
