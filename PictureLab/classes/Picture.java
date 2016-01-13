@@ -112,7 +112,7 @@ public class Picture extends SimplePicture
     }
   }
   
-  /** Method to set  */
+  /** Method to set the RGB values to 255-value */
   public void negate()
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -123,6 +123,53 @@ public class Picture extends SimplePicture
         pixelObj.setRed(255-pixelObj.getRed());
         pixelObj.setGreen(255-pixelObj.getGreen());
         pixelObj.setBlue(255-pixelObj.getBlue());
+      }
+    }
+  }
+  
+  /** Method to set RGB values to their average */
+  public void grayscale()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int avg = (pixelObj.getRed() + pixelObj.getGreen() + pixelObj.getBlue()) / 3;
+        pixelObj.setRed(avg);
+        pixelObj.setGreen(avg);
+        pixelObj.setBlue(avg);
+      }
+    }
+  }
+  
+  /** Method to set  */
+  public void fixUnderwater()
+  {
+    // 0,160 145,460
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel pixel = null;
+    for (int row = 0; row < 145; row++)
+    {
+      for (int col = 160; col < 460; col++)
+      {
+        int blue;
+        int green;
+        pixel = pixels[row][col];
+        if (pixel.getBlue() > 175)
+        {
+            blue = (int) (pixel.getBlue() * 1.25);
+            pixel.setBlue(blue);
+            green = (int) (pixel.getGreen() * 1.25);
+            pixel.setGreen(green);
+        }
+        else
+        {
+            blue = (int) (pixel.getBlue() * 0.75);
+            pixel.setBlue(blue);
+            green = (int) (pixel.getGreen() * 0.75);
+            pixel.setGreen(green);
+        }
       }
     }
   }
