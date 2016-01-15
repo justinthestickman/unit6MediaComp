@@ -149,9 +149,11 @@ public class Picture extends SimplePicture
     // 0,160 145,460
     Pixel[][] pixels = this.getPixels2D();
     Pixel pixel = null;
-    for (int row = 0; row < 145; row++)
+    //for (int row = 0; row < 145; row++)
+    for (int row = 0; row < pixels.length; row++)
     {
-      for (int col = 160; col < 460; col++)
+      //for (int col = 160; col < 460; col++)
+      for (int col = 0; col < pixels[0].length; col++)
       {
         int blue;
         int green;
@@ -392,7 +394,6 @@ public class Picture extends SimplePicture
     this.write("collage.jpg");
   }
   
-  
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
     */
@@ -419,8 +420,23 @@ public class Picture extends SimplePicture
     }
   }
   
+  /**
+   * 
+   */
+  public void cropAndCopy(
+                          Picture sourcePicture, 
+                          int startSourceRow, 
+                          int endSourceRow, 
+                          int startSourceCol, 
+                          int endSourceCol, 
+                          int startDestRow, 
+                          int startDestCol
+                         )
+  {
+      Picture sourcePic = sourcePicture;
+  }
   
-  /* Main method for testing - each class in Java can have a main 
+  /** Main method for testing - each class in Java can have a main 
    * method 
    */
   public static void main(String[] args) 
