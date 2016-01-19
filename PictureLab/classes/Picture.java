@@ -433,17 +433,37 @@ public class Picture extends SimplePicture
                           int startDestCol
                          )
   {
-      Picture sourcePic = sourcePicture;
+      Pixel[][] fromPixels = sourcePicture.getPixels2D();
+      Pixel[][] toPixels = this.getPixels2D();
+      Pixel fromPixel = null;
+      Pixel toPixel = null;
+      int rowCounter = 0;
+      int colCounter = 0;
+      for (int r = startSourceRow; r < endSourceRow; r++)
+      {
+          for (int c = startSourceCol; c < endSourceCol; c++)
+          {
+              fromPixel = fromPixels[r][c];
+              toPixel = toPixels[startDestRow + rowCounter][startDestCol + colCounter];
+              toPixel.setColor(fromPixel.getColor());
+              colCounter++;
+          }
+          rowCounter++;
+          colCounter = 0;
+      }
   }
   
   /** Main method for testing - each class in Java can have a main 
    * method 
    */
-  public static void main(String[] args) 
+  public static void main(String[] args)
   {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
+    Picture canvas = new Picture(540,960);
+    Picture hiking = new Picture("hiking.jpg");
+    canvas.explore();
+    
+    canvas.cropAndCopy(hiking, 0, 540, 0, 960, 0, 0);
+    
+    canvas.explore();
   }
 } // this } is the end of class Picture, put all new methods before this
