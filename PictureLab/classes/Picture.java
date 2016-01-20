@@ -98,6 +98,32 @@ public class Picture extends SimplePicture
     }
   }
   
+  /** Method to set the green to 0 */
+  public void zeroGreen()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setGreen(0);
+      }
+    }
+  }
+  
+  /** Method to set the red to 0 */
+  public void zeroRed()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(0);
+      }
+    }
+  }
+  
   /** Method to set the red and green to 0 */
   public void keepOnlyBlue()
   {
@@ -106,7 +132,35 @@ public class Picture extends SimplePicture
     {
       for (Pixel pixelObj : rowArray)
       {
+        pixelObj.setGreen(0);
         pixelObj.setRed(0);
+      }
+    }
+  }
+  
+  /** Method to set the blue and red to 0 */
+  public void keepOnlyGreen()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setBlue(0);
+        pixelObj.setRed(0);
+      }
+    }
+  }
+  
+  /** Method to set the red and green to 0 */
+  public void keepOnlyRed()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setBlue(0);
         pixelObj.setGreen(0);
       }
     }
@@ -453,17 +507,46 @@ public class Picture extends SimplePicture
       }
   }
   
-  /** Main method for testing - each class in Java can have a main 
-   * method 
+  /** Main method for testing - each class in Java can have a main method
+   * Collage Lab
    */
   public static void main(String[] args)
   {
-    Picture canvas = new Picture(540,960);
+    Picture collage = new Picture(810,1440);
+    
     Picture hiking = new Picture("hiking.jpg");
-    canvas.explore();
+    collage.cropAndCopy(hiking, 0, 540, 0, 960, 0, 0);
     
-    canvas.cropAndCopy(hiking, 0, 540, 0, 960, 0, 0);
+    //Half size hiking picture (not in collage)
+    Picture halfHiking = hiking.scale(0.5,0.5);
     
-    canvas.explore();
+    //Half size grayscale hiking picture
+    Picture grayscaleHiking = new Picture(halfHiking);
+    grayscaleHiking.grayscale();
+    collage.cropAndCopy(grayscaleHiking, 0, 270, 0, 480, 0, 960);
+    
+    //Half size negated hiking picture
+    Picture negatedHiking = new Picture(halfHiking);
+    negatedHiking.negate();
+    collage.cropAndCopy(negatedHiking, 0, 270, 0, 480, 270, 960);
+    
+    //Half size zeroBlue hiking picture
+    Picture noBlueHiking = new Picture(halfHiking);
+    noBlueHiking.zeroBlue();
+    collage.cropAndCopy(noBlueHiking, 0, 270, 0, 480, 540, 0);
+    
+    //Half size zeroGreen hiking picture
+    Picture noGreenHiking = new Picture(halfHiking);
+    noGreenHiking.zeroGreen();
+    collage.cropAndCopy(noGreenHiking, 0, 270, 0, 480, 540, 480);
+    
+    //Half size vertically reflected hiking picture
+    Picture vertReflectHiking = new Picture(halfHiking);
+    vertReflectHiking.mirrorVertical();
+    collage.cropAndCopy(vertReflectHiking, 0, 270, 0, 480, 540, 960);
+    
+    collage.write("Collage.jpg");
+    
+    collage.explore();
   }
 } // this } is the end of class Picture, put all new methods before this
