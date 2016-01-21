@@ -197,6 +197,36 @@ public class Picture extends SimplePicture
     }
   }
   
+  /** Method to set RGB values to their average */
+  public void sepia()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    this.grayscale();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int red = pixelObj.getRed();
+        int green = pixelObj.getGreen();
+        int blue = pixelObj.getBlue();
+        if (red < 60)
+        {
+            pixelObj.setRed((int)(red * 0.90));
+            pixelObj.setGreen((int)(green * 0.90));
+            pixelObj.setBlue((int)(blue * 0.90));
+        }
+        else if (red < 190)
+        {
+            pixelObj.setBlue((int)(blue * 0.80));
+        }
+        else
+        {
+            pixelObj.setBlue((int)(blue * 0.90));
+        }
+      }
+    }
+  }
+  
   /** Method to set  */
   public void fixUnderwater()
   {
